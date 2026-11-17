@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CATEGORIES } from '../categories'
 
 function today() {
   return new Date().toISOString().slice(0, 10)
@@ -9,6 +10,13 @@ function TransactionForm({ onAdd }) {
   const [amount, setAmount] = useState('')
   const [type, setType] = useState('expense')
   const [date, setDate] = useState(today())
+  const [category, setCategory] = useState(CATEGORIES.expense[0].name)
+
+  // income and expense have different categories, so reset it when the type changes
+  function changeType(newType) {
+    setType(newType)
+    setCategory(CATEGORIES[newType][0].name)
+  }
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -18,6 +26,7 @@ function TransactionForm({ onAdd }) {
       title: title.trim(),
       amount: Number(amount),
       type,
+      category,
       date,
     })
 
@@ -32,14 +41,14 @@ function TransactionForm({ onAdd }) {
         <button
           type="button"
           className={type === 'expense' ? 'active expense' : ''}
-          onClick={() => setType('expense')}
+          onClick={() => changeType('expense')}
         >
           Expense
         </button>
         <button
           type="button"
           className={type === 'income' ? 'active income' : ''}
-          onClick={() => setType('income')}
+          onClick={() => changeType('income')}
         >
           Income
         </button>
@@ -65,6 +74,17 @@ function TransactionForm({ onAdd }) {
           min="0"
           step="0.01"
         />
+      </label>
+
+      <label>
+        Category
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          {CATEGORIES[type].map((c) => (
+            <option key={c.name} value={c.name}>
+              {c.icon} {c.name}
+            </option>
+          ))}
+        </select>
       </label>
 
       <label>

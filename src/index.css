@@ -340,3 +340,41 @@ body {
   border-radius: 6px;
   font-size: 14px;
 }
+
+/* ---------- tablet and mobile ---------- */
+@media (max-width: 800px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .header h1 {
+    font-size: 26px;
+  }
+
+  .summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* balance takes the full row on small screens */
+  .summary-box:first-child {
+    grid-column: span 2;
+  }
+
+  .summary-box h3 {
+    font-size: 20px;
+  }
+
+  .month-filter {
+    justify-content: space-between;
+  }
+
+  .item {
+    padding: 10px;
+  }
+
+  .item-title {
+    overflow-wrap: anywhere;
+  }
+}

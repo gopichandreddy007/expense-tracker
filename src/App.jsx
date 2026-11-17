@@ -27,6 +27,10 @@ function App() {
     setTransactions([transaction, ...transactions])
   }
 
+  function deleteTransaction(id) {
+    setTransactions(transactions.filter((t) => t.id !== id))
+  }
+
   return (
     <div className="app">
       <header className="header">
@@ -44,7 +48,7 @@ function App() {
 
         <section className="card">
           <h2>History</h2>
-          <TransactionList transactions={transactions} />
+          <TransactionList transactions={transactions} onDelete={deleteTransaction} />
         </section>
       </main>
     </div>

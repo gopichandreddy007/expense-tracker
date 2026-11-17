@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TransactionForm from './components/TransactionForm'
+import TransactionList from './components/TransactionList'
 
 function App() {
   const [transactions, setTransactions] = useState([])
@@ -23,7 +24,7 @@ function App() {
 
         <section className="card">
           <h2>History</h2>
-          <p>{transactions.length} transactions</p>
+          <TransactionList transactions={transactions} />
         </section>
       </main>
     </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
+import Summary from './components/Summary'
 
 function App() {
   const [transactions, setTransactions] = useState([])
@@ -15,6 +16,8 @@ function App() {
         <h1>💰 Expense Tracker</h1>
         <p>Keep track of where your money goes</p>
       </header>
+
+      <Summary transactions={transactions} />
 
       <main className="layout">
         <section className="card">

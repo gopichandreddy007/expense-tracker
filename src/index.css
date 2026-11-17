@@ -275,3 +275,23 @@ body {
   font-size: 18px;
   flex-shrink: 0;
 }
+
+/* ---------- month filter ---------- */
+.month-filter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.month-filter select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: white;
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
 import Summary from './components/Summary'
+import MonthFilter from './components/MonthFilter'
 
 const STORAGE_KEY = 'expense-tracker-transactions'
 
@@ -15,8 +16,13 @@ function loadTransactions() {
   }
 }
 
+function currentMonth() {
+  return new Date().toISOString().slice(0, 7) // "2026-11"
+}
+
 function App() {
   const [transactions, setTransactions] = useState(loadTransactions)
+  const [month, setMonth] = useState(currentMonth())
 
   // save every time the list changes
   useEffect(() => {
@@ -31,6 +37,16 @@ function App() {
     setTransactions(transactions.filter((t) => t.id !== id))
   }
 
+  // every month that has a transaction, plus the current month, newest first
+  const months = [...new Set([currentMonth(), ...transactions.map((t) => t.date.slice(0, 7))])]
+    .sort()
+    .reverse()
+
+  // only the selected month, newest date first
+  const visible = transactions
+    .filter((t) => month === 'all' || t.date.startsWith(month))
+    .sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id)
+
   return (
     <div className="app">
       <header className="header">
@@ -38,7 +54,9 @@ function App() {
         <p>Keep track of where your money goes</p>
       </header>
 
-      <Summary transactions={transactions} />
+      <MonthFilter months={months} selected={month} onChange={setMonth} />
+
+      <Summary transactions={visible} />
 
       <main className="layout">
         <section className="card">
@@ -48,7 +66,7 @@ function App() {
 
         <section className="card">
           <h2>History</h2>
-          <TransactionList transactions={transactions} onDelete={deleteTransaction} />
+          <TransactionList transactions={visible} onDelete={deleteTransaction} />
         </section>
       </main>
     </div>

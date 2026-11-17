@@ -332,3 +332,11 @@ body {
 .legend-value small {
   color: var(--muted);
 }
+
+.error {
+  color: var(--expense);
+  background: #fee2e2;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}

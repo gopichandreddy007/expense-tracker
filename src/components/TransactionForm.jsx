@@ -8,6 +8,7 @@ function TransactionForm({ onAdd }) {
   const [type, setType] = useState('expense')
   const [date, setDate] = useState(todayString())
   const [category, setCategory] = useState(CATEGORIES.expense[0].name)
+  const [error, setError] = useState('')
 
   // income and expense have different categories, so reset it when the type changes
   function changeType(newType) {
@@ -17,6 +18,20 @@ function TransactionForm({ onAdd }) {
 
   function handleSubmit(e) {
     e.preventDefault()
+
+    if (!title.trim()) {
+      setError('Please enter a title.')
+      return
+    }
+    if (!amount || Number(amount) <= 0) {
+      setError('Amount must be more than 0.')
+      return
+    }
+    if (!date) {
+      setError('Please pick a date.')
+      return
+    }
+    setError('')
 
     onAdd({
       id: Date.now(),
@@ -88,6 +103,8 @@ function TransactionForm({ onAdd }) {
         Date
         <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
       </label>
+
+      {error && <p className="error">{error}</p>}
 
       <button type="submit" className="submit-btn">
         Add {type === 'expense' ? 'Expense' : 'Income'}

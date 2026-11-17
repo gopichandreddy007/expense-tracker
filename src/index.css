@@ -295,3 +295,40 @@ body {
   font-family: inherit;
   background: white;
 }
+
+/* ---------- chart ---------- */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.legend {
+  list-style: none;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-name {
+  flex: 1;
+}
+
+.legend-value small {
+  color: var(--muted);
+}

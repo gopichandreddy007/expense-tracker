@@ -3,6 +3,7 @@ import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
 import Summary from './components/Summary'
 import MonthFilter from './components/MonthFilter'
+import ExpenseChart from './components/ExpenseChart'
 import { todayString } from './utils'
 
 const STORAGE_KEY = 'expense-tracker-transactions'
@@ -60,10 +61,17 @@ function App() {
       <Summary transactions={visible} />
 
       <main className="layout">
-        <section className="card">
-          <h2>Add transaction</h2>
-          <TransactionForm onAdd={addTransaction} />
-        </section>
+        <div className="side">
+          <section className="card">
+            <h2>Add transaction</h2>
+            <TransactionForm onAdd={addTransaction} />
+          </section>
+
+          <section className="card">
+            <h2>Spending by category</h2>
+            <ExpenseChart transactions={visible} />
+          </section>
+        </div>
 
         <section className="card">
           <h2>History</h2>

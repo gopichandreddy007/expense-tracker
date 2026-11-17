@@ -1,15 +1,12 @@
 import { useState } from 'react'
 import { CATEGORIES } from '../categories'
-
-function today() {
-  return new Date().toISOString().slice(0, 10)
-}
+import { todayString } from '../utils'
 
 function TransactionForm({ onAdd }) {
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState('')
   const [type, setType] = useState('expense')
-  const [date, setDate] = useState(today())
+  const [date, setDate] = useState(todayString())
   const [category, setCategory] = useState(CATEGORIES.expense[0].name)
 
   // income and expense have different categories, so reset it when the type changes

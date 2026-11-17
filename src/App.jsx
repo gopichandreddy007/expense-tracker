@@ -3,6 +3,7 @@ import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
 import Summary from './components/Summary'
 import MonthFilter from './components/MonthFilter'
+import { todayString } from './utils'
 
 const STORAGE_KEY = 'expense-tracker-transactions'
 
@@ -17,7 +18,7 @@ function loadTransactions() {
 }
 
 function currentMonth() {
-  return new Date().toISOString().slice(0, 7) // "2026-11"
+  return todayString().slice(0, 7) // "2026-11"
 }
 
 function App() {
